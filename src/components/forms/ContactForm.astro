@@ -9,13 +9,27 @@ const selectOptions = [
 
 ---
 
-<form name="Contact Form" method="POST" action="/contact-thank-you">
-  <FormInput type="text" label="Name" name="Name" placeholder="Your name" />
-  <FormInput type="email" label="Email" name="Email" placeholder="youremail@example.com" />
-  <FormSelect label="How Did You Hear About Us?" options={selectOptions} />
-  <FormTextarea label="Message" name="Message" placeholder="Your message here..." />
-  <Button>Submit</Button>
+<form name="Contact Form" onsubmit="handleSubmit(event)">
+  <FormInput type="text" label="Name" name="name" placeholder="Your name" />
+  <FormInput type="email" label="Email" name="email" placeholder="youremail@example.com" />
+  <FormSelect label="How Did You Hear About Us?" name="source" options={selectOptions} />
+  <FormTextarea label="Message" name="message" placeholder="Your message here..." />
+  <Button type="submit">Submit</Button>
 </form>
+
+<script>
+  function handleSubmit(event) {
+    event.preventDefault(); // Prevent the form from submitting in the traditional way
+    const form = event.target;
+    const name = form.querySelector('input[name="name"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+    const source = form.querySelector('select[name="source"]').value;
+    const message = form.querySelector('textarea[name="message"]').value;
+
+    const emailBody = encodeURI(`Name: ${name}\nEmail: ${email}\nSource: ${source}\nMessage: ${message}`);
+    window.location.href = `mailto:yourdestinationemail@example.com?subject=New Contact Form Submission&body=${emailBody}`;
+  }
+</script>
 
 <style>
   form {
