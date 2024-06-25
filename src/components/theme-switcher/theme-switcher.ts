@@ -122,7 +122,7 @@ export class ThemeSwitcher extends LitElement {
 			_heroImage.src = '/assets/images/home/ocean-hero.jpg';
 		}
 		if (theme === 'sand') {
-			_heroImage.src = '/assets/images/home/sand-hegitro.jpg';
+			_heroImage.src = '/assets/images/home/sand-hero.jpg';
 		}
 		localStorage.setItem('theme', theme);
 		this.theme = theme;
